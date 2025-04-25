@@ -1,7 +1,7 @@
 ---
-title: How to write notes
-categories: [notes-jekyll]
-tags: [jekyll]
+title: Template
+categories: []
+tags: []
 datacamp: 1
 maths: 1
 toc: 1
@@ -48,10 +48,13 @@ Available languages : `ruby`, `python`, `c`, `matlab`, `latex`, `html`, `css`, `
 For example, **Python** with **line numbering**,
 
 ~~~ {%raw%}
-{% highlight python linenos %}
 
-{% endhighlight %}
 {% endraw %} ~~~
+
+{% highlight java linenos %}
+System.out.print("Hello World");
+def this_is_a_long_function(int a, int b)
+{% endhighlight %}
 
 or something appears in the command line window like this
 <div class="terminal" markdown="1">
