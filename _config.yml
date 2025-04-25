@@ -1,8 +1,8 @@
 title: hyunkyu-notes
 description: Notes for tutoring
-baseurl: "/notes-jekyll"
-url: ""
-repository: vsoch/notes-jekyll
+baseurl: ""
+url: "https://hyunkyunotes.github.io"
+repository: hyunkyunotes/hyunkyunotes.github.io
 paginate: 28
 
 banner: "/assets/img/banner.png" # site banner (load when someone share your page url)
