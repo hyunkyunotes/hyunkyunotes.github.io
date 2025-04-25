@@ -1,6 +1,6 @@
 title: hyunkyu-notes
 description: Notes for tutoring
-baseurl: "/notes-jekyll
+baseurl: "/notes-jekyll"
 url: ""
 repository: vsoch/notes-jekyll
 paginate: 28
