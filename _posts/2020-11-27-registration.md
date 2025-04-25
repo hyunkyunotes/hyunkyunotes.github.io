@@ -35,4 +35,7 @@ Ultrices eros in cursus turpis massa tincidunt dui. Non quam lacus suspendisse f
 Commodo elit at imperdiet dui accumsan. Tellus at urna condimentum mattis pellentesque. Mi in nulla posuere sollicitudin. A pellentesque sit amet porttitor eget dolor. Metus dictum at tempor commodo ullamcorper a lacus. Tellus at urna condimentum mattis pellentesque id nibh tortor. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Risus quis varius quam quisque id diam vel quam elementum. Sagittis eu volutpat odio facilisis mauris sit amet massa. Orci ac auctor augue mauris augue. In metus vulputate eu scelerisque. Vitae proin sagittis nisl rhoncus. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Tellus mauris a diam maecenas sed enim ut sem. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Arcu risus quis varius quam quisque id diam. Rhoncus urna neque viverra justo nec.
 
 
+# Testing LaTeX
+
+$$ \nabla_\boldsymbol{x} J(\boldsymbol{x}) $$
 <hr>
