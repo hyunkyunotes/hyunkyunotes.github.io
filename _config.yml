@@ -1,8 +1,8 @@
-title: notes-jekyll
-description: I want to write it down, and for it to be pretty.
-baseurl: "/notes-jekyll"
+title: hyunkyu-notes
+description: Notes for tutoring
+baseurl: "/hyunkyu-notes"
 url: ""
-repository: vsoch/notes-jekyll
+repository: hyunkyunotes/hyunkyunotes.github.io
 paginate: 28
 
 banner: "/assets/img/banner.png" # site banner (load when someone share your page url)
@@ -22,7 +22,7 @@ collections:
 # MatJek specific configurations
 user: 
   avatar: "/assets/img/logo.png"
-  github: "vsoch"
+  github: "hyunkyunote.github.io"
 
 # Build settings
 markdown: kramdown
