@@ -2,7 +2,7 @@ title: hyunkyu-notes
 description: Notes for tutoring
 baseurl: "/hyunkyu-notes"
 url: ""
-repository: hyunkyunotes/hyunkyunotes.github.io
+repository: vsoch/notes-jekyll
 paginate: 28
 
 banner: "/assets/img/banner.png" # site banner (load when someone share your page url)
@@ -22,7 +22,7 @@ collections:
 # MatJek specific configurations
 user: 
   avatar: "/assets/img/logo.png"
-  github: "hyunkyunote.github.io"
+  github: "vsoch"
 
 # Build settings
 markdown: kramdown
