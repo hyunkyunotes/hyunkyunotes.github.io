@@ -50,24 +50,24 @@ The simplest thing you might want to do is cite something. For example,
 if I type:
 
 ```
-{% raw %}{% cite metz2011nonrigid %}{% endraw %}
+{% raw %}{% endraw %}
 ```
 
 If you want to cite a particular set of pages or lines, you can do:
 
 ```
-{% raw %}{% cite metz2011nonrigid --locator 23-5 %}{% endraw %}
+{% raw %}{% endraw %}
 ```
 
 And then I can include the entire list of references, usually at the end of the page, as follows:
 
 ```
-{% raw %}{% bibliography --cited %}{% endraw %}
+{% raw %}{% endraw %}
 ```
 
 You can remove the `--cited` to include all references, regardless of being mentioned or
-not. And then I can easily render the citation {% cite hinsen2019dealing %}.
-Or make a citation that references lines {% cite metz2011nonrigid --locator 23-5 %}.
+not. And then I can easily render the citation.
+Or make a citation that references lines.
 You should be able to click either of those numbers and be taken to the references at the bottom.
 
 
@@ -77,13 +77,12 @@ In the same spirit as the above, you can print the reference for any particular 
 as follows:
 
 ```
-{% raw %}{% reference metz2011nonrigid %}{% endraw %}
+{% raw %}{% endraw %}
 ```
 
 That renders to the following (and note the class is "citation" if you want to edit the
 style):
 
-{% reference metz2011nonrigid %}
 
 
 ##### Quotes
@@ -92,24 +91,22 @@ You might also want to quote text, verbatim. That might look like this, for the 
 paper:
 
 ```
-{% raw %}{% quote metz2011nonrigid %}
+{% raw %}
 Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 sed do eiusmod tempor.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing.
-{% endquote %}{% endraw %}
+{% endraw %}
 ```
 
 And here is the rendered version of that.
 
-{% quote hinsen2019dealing %}
+
 Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 sed do eiusmod tempor.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing.
-{% endquote %}
 
-{% bibliography --cited %}
 
 <fieldset class="field-set" markdown="1">
 <legend class="leg-title">Examples</legend>
@@ -136,19 +133,10 @@ maths: 1
 toc: 1
 ---
 {% raw %}
-{% cite keyToReference %}
 
-{% quote metz2011nonrigid %}
-This is an example of a cited quote.
-Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-sed do eiusmod tempor.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing.
-{% endquote %}
 
 <hr>
 
-{% bibliography --cited %}
 {% endraw %}
 ```
 

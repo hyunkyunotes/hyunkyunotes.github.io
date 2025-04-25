@@ -30,7 +30,6 @@ highlighter: rouge
 permalink: /:title
 
 plugins:
-  - jekyll-scholar
   - jekyll-feed
   - jekyll-paginate
   - jekyll-seo-tag
