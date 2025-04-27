@@ -1,7 +1,7 @@
 ---
-title: Template
-categories: []
-tags: []
+title: AP CSA FRQ Notes
+categories: [AP]
+tags: [CSA]
 datacamp: 1
 maths: 1
 toc: 1
@@ -9,662 +9,205 @@ toc: 1
 
 {% include toc.html %}
 
-## Front Matter
+## Q1: Methods & Control Structures
 
-[Front matter](https://jekyllrb.com/docs/frontmatter/) refers to the section of text at the top of a posts file.
-For example:
+- Usually you’re given a class; your job is to write one or more methods on it  
+- Methods almost always involve either control statements (`if`/`else`) _or_ loops (`for`/`while`)
 
-~~~ {% raw %}
----
-layout: post
-title: How to use NoteTheme?
----
-{% endraw %} ~~~
+### Tip 
+- Figure out what you think the method should do. Read the program specification and write keywords
 
-The following components are included:
+### Example
+{% highlight java linenos %}
 
-- `maths: 1` add this if you want to use mathematical expression in the post.
-- `toc: 1` if you want to display a table of contents on the left sidebar
-- `datacamp: 1` if you want to embed a datacamp interactive code question (see below)
-- `categories: [notetheme,jekyll]` add category you want
-- `tags: [notetheme,jekyll,code]` add tag you want
-- `date: 2018-08-21` if you update the post, write the updated date
+public class SquirrelFeeder
+{
+    private int currentNuts;
 
+    /**
+     * Simulates one day with numSquirrels squirrels or possibly a raccoon at the feeder,
+     * as described in part (a)
+     * Precondition: numSquirrels > 0
+     */
+    public void simulateOneDay(int numSquirrels)
+    { /* to be implemented in part (a) */ }
 
-## Code
+    /**
+     * Returns the number of days squirrels or a raccoon found food to eat at the feeder in this simulation,
+     * as described in part (b)
+     * Preconditions: numSquirrels > 0, numDays > 0
+     */
+    public int simulateManyDays(int numSquirrels, int numDays)
+    { /* to be implemented in part (b) */ }
+}
 
-### Syntax highlighting
-
-You can insert any block of code you want with a syntax highlight effect like below
-
-Available languages : `ruby`, `python`, `c`, `matlab`, `latex`, `html`, `css`, `javascript`.
-
-~~~ {%raw%}
-{% highlight ruby %}
 
 {% endhighlight %}
-{% endraw %} ~~~
 
-For example, **Python** with **line numbering**,
+(a) On a normal day (90% chance), each squirrel eats between 5 and 15 nuts (inclusive), randomly. On an abnormal day (10% chance), a raccoon eats everything. If the total intended consumption exceeds the available food, the feeder is emptied.
+Implement `simulateOneDay`.
 
-~~~ {%raw%}
+(b) Implement `simulateManyDays` to return the number of days where food was available to be eaten.
 
-{% endraw %} ~~~
+
+
+## Q2: Class Implementation from a Spec
+
+When they give you a program specification, you must build the entire class:
+
+### Tips
+1. **Read** the spec and list out the **private** instance variables you think you’ll need  
+2. **Write** the constructor header as specified  
+3. **Double-check**: Are your instance variables sufficient? Add or remove as needed  
+4. **Repeat** same procedure for each method you need to implement.
+
+**Inheritance notes**  
+- Use `extends` to subclass  
+- **Do not** recreate variables/methods already in the superclass  
+- In your subclass constructor, call `super(...)` first  
+- If you override a method but still need the base behavior, call `super.methodName(...)` inside it  
+- Access inherited members via their public methods, not by hacking fields
+
+### Example
+{ % highlight java linenos %}
+public class MatchTracker
+{
+    public MatchTracker(String team1, String team2) { /* implementation not shown */ }
+
+    /**
+     * Records an outcome for the active team.
+     * A positive value adds to their score.
+     * A 0 ends their turn.
+     * Precondition: points >= 0
+     */
+    public void recordPlay(int points)
+    { /* to be implemented */ }
+
+    /**
+     * Returns current score in format: "Team1Score-Team2Score-ActiveTeamName"
+     */
+    public String getScore()
+    { /* to be implemented */ }
+}
+{ % endhighlight %}
+Create the `recordPlay` and `getScore` methods. Alternate teams when points == 0. Maintain scores separately and alternate turns properly.
+
+
+## Q3: Arrays & ArrayLists
+
+- Generally involves, `Creation`, `traversal`, `manipulation`
+
+### Tips
+- `Watch out` for these common mistakes:  
+  - Using `[]` instead of `.get()` / `.set()` on an `ArrayList`  
+  - Declaring an `ArrayList<int>` (invalid)—use `ArrayList<Integer>`  
+  - Removing elements while iterating: always `loop backwards` to avoid index shifts
+  - Adding elements while iterating: check example
+
+### Examples
+
+<!-- 1. Removing while iterating
+2. Adding while iterating
+3. Actual  -->
 
 {% highlight java linenos %}
-System.out.print("Hello World");
-def this_is_a_long_function(int a, int b)
+public class CourseProgress
+{
+    private ArrayList<Integer> progress;
+
+    public CourseProgress()
+    { /* initializes progress as an empty list */ }
+
+    /**
+     * Adds a daily completion percentage (0 to 100 inclusive).
+     * A student may have incomplete (less than 100%) days.
+     */
+    public void addDailyProgress(int percent)
+    { /* to be implemented in part (a) */ }
+
+    /**
+     * Returns true if the average of the last N days is at least threshold.
+     * If fewer than N days, return false.
+     */
+    public boolean isOnTrack(int numDays, double threshold)
+    { /* to be implemented in part (b) */ }
+}
 {% endhighlight %}
 
-or something appears in the command line window like this
-<div class="terminal" markdown="1">
-`$ sudo apt-get update`
-</div>
-by using
-~~~ html
-<div class="terminal" markdown="1">
-`$ sudo apt-get update`
-</div>
-~~~
+(a) Implement `addDailyProgress` by appending to the progress list.
+(b) Implement `isOnTrack` to compute average of the most recent `numDays` entries.
 
+## Q4: 2D Arrays
 
-### Keyboard
+- Don't be afraid just because it's 2D. There's nothing different from 1D array.
+- To get dimensions:  
+  - **Rows** = `arr.length`  
+  - **Cols** = `arr[0].length`  
+- **Common problem**: “Mirror” a 2D array or reverse rows/columns
 
-You can also insert a keyboard key like this <kbd>Ctrl</kbd> + <kbd>B</kbd>, just use `<kbd>Ctrl</kbd>`.
+### Examples
+{% highlight java linenos %}
+public class SensorData
+{
+    private ArrayList<Double> readings;
 
-## Insert a figure
+    public SensorData(ArrayList<Double> data)
+    { /* initializes readings with a deep copy of data */ }
 
-### Standard
+    /**
+     * Removes any values outside the range [min, max] (inclusive).
+     */
+    public void filter(double min, double max)
+    { /* to be implemented */ }
 
-~~~ {% raw %}
-![](/link/to/figure/){:.w-500 .no-border}
-{% endraw %} ~~~
-
-<div class="thi-colums" markdown="1">
-- `no-border`: remove the border around figure
-- `w-300`: reduce the size of image to maximum `300px` (if the screen's maximum size is `500px`, the figure's size will be `100%` the size of the screen). You can change the number `3` in `300` by other numbers `2,4,5,6,7,8,10` or something like `w-150`.
-</div>
-
-### Inline
-
-~~~ {% raw %}
-{% include img-inline.html content="/link/to/figure/" %}
-{% endraw %} ~~~
-
-## Insert an video from Youtube
-
-Determine the youtube video's url, like this
-
-~~~
-https://www.youtube.com/watch?v=wIsK4kQTrIg
-~~~
-
-Choose `wIsK4kQTrIg` and put it inside below code
-
-~~~ {% raw %}
-{% include youtube.html content="wIsK4kQTrIg" size="5" %}
-{% endraw %} ~~~
-
-In that, `5` represents the percent your youtube container width in comparison with the page's width, for example, `5` means "50%". You can choose any integer number between `3` and `10`. This size is only available on a wide screen (min width is 993px), when the screen is smaller than 993px, the width becomes automatically 100% of page width.
-
-## For writing posts
-
-### Remove heading numbering
-
-If you don't want display number before some heading, just put BEFORE this heading `{.nocount}`, for example,
-
-~~~ {% raw %}
-{:.nocount}
-## Heading without numbering
-{% endraw %} ~~~
-
-If you want to use multiple classes, separate them by space.
-
-### Manually assign an id for a heading
-
-Indert `{:#your-id}` before this heading, for instance,
-
-~~~ {% raw %}
-{:#your-id}
-## Heading
-{% endraw %} ~~~
-
-If you want to then use it
-
-~~~ {% raw %}
-[Caption]({{ post.url }}#your-id)
-{% endraw %} ~~~
-
-### Insert toc (Table of Contents)
-
-There are actually two choices for the Table of contents! You can add one manually (as
-you see to the right, here):
-
-```
-{% raw %}{% include toc.html %}{% endraw %}
-```
-
-And you can also see the one generated in the left sidebar via the front end matter:
-
-```yaml
-toc: 1
-```
-
-### Make a list into columns
-
-Put the list inside a `<div>` tag like,
-
-{% highlight html %}
-<div class="thi-columns" markdown="1">
-- item 1
-- item 2
-- item 3
-- item 4
-- item 5
-- item 6
-</div>
+    /**
+     * Returns average of the remaining values.
+     * If no readings remain, return -1.
+     */
+    public double getAverage()
+    { /* to be implemented */ }
+}
 {% endhighlight %}
+Implement `filter` to remove values from the list that fall outside `[min, max]`. Implement `getAverage` to return the average of the remaining values, or `-1` if the list is empty.
 
-And the result looks like this - notice how we span two colums!
 
-<div class="thi-columns" markdown="1">
-- item 1
-- item 2
-- item 3
-- item 4
-- item 5
-- item 6
-</div>
 
-### Insert a read-more link
+## Comprehensive Practice
 
-~~~ {% raw %}
-{% include more.html content="[Welcome to Math2IT](http://math2it.com)." %}
-{% endraw %} ~~~
+- **String methods** you’ll see everywhere:  
+  - `s.length()` vs. `arr.length`  
+  - `s.substring(a, b)`  
+  - `s.indexOf(…)` (returns `-1` if not found)  
+  - `s.compareTo(…)`, `s.equals(…)`  
+- **Handwriting** your code:  
+  1. Read spec; don’t jump to examples unless you’re stuck  
+  2. Outline variables and high-level steps on scrap paper  
+  3. Jump into code fast—even if messy, you can cross out as you refine  
+- **`static`**: Only use for utility methods, never for accessors/mutators in FRQs
 
-{% include more.html content="[Welcome to Math2IT](http://math2it.com)." %}
+## General FRQ Strategies
 
+- Coding rewards `pattern recognition`
+	- In other words, work through many past frq problems and frq problems in test prep books
+- If there are more than one method in a problem. For the later ones, review the question to check if you need/can use a previously implemented method.
 
-### Insert steps
+## Common Pitfalls
 
-If you want something like this:
+- `=` vs. `==` for comparison  
+- Chained comparisons like `a <= b <= c` (invalid)—use `a <= b && b <= c`  
+- **Off-by-one** when adding/removing array or list elements  
+- **Variable names** matter—choose meaningful names for grader readability  
+- **Stuck on spec?** Skip it, come back  
+  - If still stuck, write a mini-outline of variables & you’ll earn partial credit  
+- **Searching** patterns:  
+  {% highlight java linenos %}
+  for(...) {
+    if (condition) return true; 
+  }
+  return false;
+  {% endhighlight %}
 
-<div  class="thi-step">
-<div class="step">
-<div class="step-number">
-</div>
-<div class="step-content" markdown="1">
-Content in step 1.
-</div>
-</div>
+- make sure the return false condition is outside the iteration
 
-<div class="step">
-<div class="step-number">
-</div>
-<div class="step-content" markdown="1">
-Content in step 2
-</div>
-</div>
-</div>
+### Example
 
-
-Do the following:
-
-~~~ html
-<div  class="thi-step">
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 1.
-</div>
-</div>
-
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 2
-</div>
-</div>
-</div>
-~~~
-
-
-## Mathematical expressions
-
-### Inline math
-For inline math, use `$math-expression$`
-
-### Block
-For an entire block, you can use `$math block$` or 
-
-
-	$x^n + y^n = z^n$
-
-
-Which will render to $x^n + y^n = z^n$.
-
-
-#### Special Characters
-
-If you want to insert some special characters, you must put `\` before this character, for instance, `\\{ 1,2,3 \\}` gives $\\{ 1m2,3 \\}$
-
-**Tips**
- - If you type inline math that contains characters `_`, you must add `\` before each of them, for example, `a\_1` give $a\_1$.
- - Don't use `||` for absolute values, let's use `\vert \vert` instead.
- - Don't use `\left\| \right\|` for norms, use `\Vert \Vert` instead.
- - Don't use `*` for star symbols, use `\ast` instead.
- - If you want to type `\\`, type `\\\\` instead.
-
-#### Matrices
-If you want to type an inline matrix, e.g., $[A]=\begin{bmatrix}1 & 2 \\\\ 2 & 3.999 \end{bmatrix}$, type like below,
-
-	$[A]=\begin{bmatrix}1 & 2 \\\\ 2 & 3.999 \end{bmatrix},$
-
-
-#### Labels
-In order to use `\label{}` and `\eqref{}` like in latex, use
-
-	$\begin{align}\tag{1}\label{eq1}
-	x^n + y^n = z^n
-	\end{align}
-	$
-	
-	Call again equation $\eqref{eq1}$.
-
-The above renders to:
-
-$\begin{align}\tag{1}\label{eq1}x^n + y^n = z^n\end{align}$
-Call again equation $\eqref{eq1}$.
-
-
-## Boxes
-
-### Theorem boxes
-
-A theorum box is a nice little callout to highlight some special text. You
-can create one as follows:
-
-{% highlight html %}
-<div class="thi-box" markdown="1">
-<div class="box-title" markdown="1">
-**Title**
-</div>
-<div class="box-content" markdown="1">
-Content
-</div>
-</div>
-{% endhighlight %}
-
-which renders into:
-
-<div class="thi-box" markdown="1">
-<div class="box-title" markdown="1">
-**Title**
-</div>
-<div class="box-content" markdown="1">
-Content
-</div>
-</div>
-
-
-### Interative coding blocks
-
-You even can embed **R/Python** code environment inside a post like this.
-
-<div class="mt-2 mb-2" data-datacamp-exercise data-lang="r">
-	<code data-type="pre-exercise-code">
-		# This will get executed each time the exercise gets initialized
-		b = 6
-	</code>
-	<code data-type="sample-code">
-		# Create a variable a, equal to 5
-		# Print out a
-	</code>
-	<code data-type="solution">
-		# Create a variable a, equal to 5
-		a <- 5
-
-		# Print out a
-		print(a)
-	</code>
-	<code data-type="sct">
-		test_object("a")
-		test_function("print")
-		success_msg("Great job!")
-	</code>
-	<div data-type="hint">Use the assignment operator (<code><-</code>) to create the variable <code>a</code>.</div>
-</div>
-
-
-### Notification boxes
-
-A notification box is useful to draw the eyes of the reader to important content.
-You could create a warning, for example, like this:
-
-~~~ {% raw %}
-{% include warning.html content="Warning's content" %}
-{% endraw %} ~~~
-
-Rendered it looks like the following:
-
-{% include warning.html content="Warning's content" %}
-
-There is another style for information:
-
-~~~ {% raw %}
-{% include tip.html content="Info's content" %}
-{% endraw %} ~~~
-
-which renders to:
-
-{% include tip.html content="Info's content" %}
-
-
-### Insert Accordian
-
-An accordian menu hides some content, and the user can click to reveal it. It's
-best to use an icon on it that suggests that the user should click, like an arrow.
-
-Use these lines of code
-
-~~~ html
-<ul class="collapsible" data-collapsible="accordion">
-<li>
-<div class="collapsible-header" markdown="1"><i class="material-icons">expand_more</i>
-Title
-</div>
-<div class="collapsible-body" markdown="1">
-Content
-</div>
-</li>
-</ul>
-~~~
-
-The above renders into an expandable section:
-
-<ul class="collapsible" data-collapsible="accordion">
-<li>
-<div class="collapsible-header" markdown="1"><i class="material-icons">expand_more</i>
-Title
-</div>
-<div class="collapsible-body" markdown="1">
-Content
-</div>
-</li>
-</ul>
-
-### Insert blockquote
-
-A blockquote is a nice style to show a quote, for example:
-
-<p class="post-more-info" markdown="1">
-The content of extra info of the post.
-</p>
-
-And you can generate the above as follows:
-
-{% highlight html %}
-<p class="post-more-info" markdown="1">
-The content of extra info of the post.
-</p>
-{% endhighlight %}
-
-> Other normal blockquote like this.
-
-### Summary block
-
-A summary block has a title, and then some content, and is another strategy
-to point out more salient information. If you use these lines of code:
-
-{% highlight html %}{%raw%}
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">Title</legend>
-Content
-</fieldset>
-{%endraw%}{% endhighlight %}
-
-You can then generate:
-
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">Title</legend>
-Content
-</fieldset>
-
-{:#cat-tag}
-## Categories and tags
-
-### Use it
-
-On the front matter of each post, use this
-
-~~~
-categories: [maths, python] 
-tags: [algebra, function, theorem]
-~~~
-
-### Create a new category
-
-1. Below the title of each post, you will see "in <category>", for example, this post **in NoteTheme**.
-2. Open file `_data\categories.yml` and add the new category you want
-	- `slug`: the id of this category, it will appear in the url, like
-		~~~
-		https://dinhanhthi.github.io/notetheme/categories#notetheme
-		~~~
-	- `name` : the name of this catefory, it will appear on the site, like `notetheme`
-
-### Already-defined tags / categories
-
-Already-defined categories:
-
-<div class="thi-columns">
-<ul>
-{% for cat in site.data.categories %}
-<li><code class="highlighter-rouge">{{ cat.slug }}</code> : <a href="/{{cat.slug}}">{{ cat.name }}</a></li>
-{% endfor %}
-</ul>
-</div>
-
-<p>
-Already-defined tags: 
-{% for tag in site.tags %}
-<code class="highlighter-rouge">{{ tag[0] }}</code>
-{% if forloop.last == false %}
-, 
-{% else %}
-.
-{% endif %}
-{% endfor %}
-</p>
-
-
-## Text
-
-- **New** badge: `<new />`
-- **Update** bagge: `<update />`
-- **Keyboard**: `<kbd>Ctrl</kbd>`
-
-<new />
-<update />
-<kbd>Ctrl</kbd>
-
-
-## Figures / Tables / Videos
-
-- **Normal way**
-
-  ~~~ {% raw %}
-  ![](/link/to/figure/){:.w-500 .no-border}
-  {% endraw %} ~~~
-
-- **Inline figures**
-
-  ~~~ {% raw %}
-  {% include img-inline.html content="/link/to/figure/" %}
-  {% endraw %} ~~~
-
-- **Youtube video**
-
-  ~~~ {% raw %}
-  {% include youtube.html content="wIsK4kQTrIg" size="5" %}
-  {% endraw %} ~~~
-
-
-## Boxes
-
-### Hide/Show
-
-~~~ html
-<ul class="collapsible" data-collapsible="accordion">
-<li>
-<div class="collapsible-header" markdown="1"><i class="material-icons">face</i>
-Title
-</div>
-<div class="collapsible-body" markdown="1">
-Content
-</div>
-</li>
-</ul>
-~~~
-
-### Notifications
-
-- Info
-
-  ~~~ html
-  <p markdown="1" class="thi-tip">
-  <i class="material-icons mat-icon">info</i>
-  content
-  </p>
-  ~~~
-
-- Error
-
-  ~~~ html
-  <p markdown="1" class="thi-warning">
-  <i class="material-icons mat-icon">error</i>
-  content
-  </p>
-  ~~~
-
-
-### Pull quotes
-
-~~~ html
-<p class="post-more-info" markdown="1">
-The content of extra info of the post.
-</p>
-~~~
-
-### Summarization box
-
-~~~ html
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">Title</legend>
-Content
-</fieldset>
-~~~
-
-### Theorem style
-
-~~~ html
-<div class="thi-box" markdown="1">
-<div class="box-title" markdown="1">
-**Title**
-</div>
-<div class="box-content" markdown="1">
-Content
-</div>
-</div>
-~~~
-
-### Important boxes
-
-~~~ html
-<div class="p-mark" markdown="1">
-Content
-</div>
-~~~
-
-## Others
-
-### Side by side
-
-~~~ html
-<div class="row d-flex" markdown="1">
-<div class="col s12 l6" markdown="1">
-This is the code
-</div>
-<div class="col s12 l6" markdown="1">
-This is the result
-</div>
-</div>
-~~~
-
-### Links
-
-See again
-
-~~~ html
-<div class="see-again">
-<i class="material-icons">settings_backup_restore</i>
-<span markdown="1">
-Content
-</span>
-</div>
-~~~
-
-Read-more link
-
-~~~ {% raw %}
-{% include more.html content="[Welcome to Math2IT](http://math2it.com)." %}
-{% endraw %} ~~~
-
-Download
-
-~~~ {% raw %}
-{% include download.html content="[Download text](download link)." %}
-{% endraw %} ~~~
-
-### Notices
-
-You can create a notice as follows:
-
-```html
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">TL;DR</legend>
-- Show the post in a flexible way.
-- Show the figures any place
-- Show the maths, the code blocks in a beautiful way.
-- and many things else...
-</fieldset>
-```
-
-And it looks like this
-
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">TL;DR</legend>
-- Show the post in a flexible way.
-- Show the figures any place
-- Show the maths, the code blocks in a beautiful way.
-- and many things else...
-</fieldset>
-
-### Steps
-
-~~~ html
-<div  class="thi-step">
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 1.
-</div>
-</div>
-
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 2
-</div>
-</div>
-</div>
-~~~
