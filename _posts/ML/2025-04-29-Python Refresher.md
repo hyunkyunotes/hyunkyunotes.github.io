@@ -1,6 +1,6 @@
 ---
 title: Python Refresher
-categories: [Machine Learning]
+categories: [ML]
 tags: [CS224N]
 datacamp: 1
 maths: 1
@@ -125,9 +125,18 @@ print(d[(1, 2)])  # Prints "1"
 
 ### Functions
 
-- [Docs](https://docs.python.org/3/library/stdtypes.html#functions)
+- [Docs](https://docs.python.org/3/tutorial/controlflow.htmls)
 - `def foo(a, b=false)`, parameters with default value must come at end
 - can specify parameter value during function call
+- `for-else`: `else` runs when `for` loop exits without breaking/return
+- `match-case`: `case _:` is the default case, can combine multiple using `|`
+- `lambda arguments : expression`
+
+{% highlight python linenos %}
+def combined_example(pos_only, /, standard, *, kwd_only):
+    print(pos_only, standard, kwd_only)
+{% endhighlight %}
+
 
 ### Class
 
@@ -147,563 +156,87 @@ class Something:
 class DerivedClassName(modname.BaseClassName): #if baseclass from same module, can be omitted
 {% endhighlight %}
 
-## For writing posts
+## Numpy 
 
-### Remove heading numbering
+### Arrays
 
-If you don't want display number before some heading, just put BEFORE this heading `{.nocount}`, for example,
+- [Docs](https://numpy.org/doc/stable/user/basics.creation.html#arrays-creation)
+- all same type, indexed by tuple, dimension = `rank`, size = `shape`
 
-~~~ {% raw %}
-{:.nocount}
-## Heading without numbering
-{% endraw %} ~~~
+{% highlight python linenos %}
+a = np.array([1, 2, 3])   # Create a rank 1 array
+print(type(a))            # Prints "<class 'numpy.ndarray'>"
+print(a.shape)            # Prints "(3,)"
+print(a[0], a[1], a[2])   # Prints "1 2 3"
+a[0] = 5                  # Change an element of the array
+print(a)                  # Prints "[5, 2, 3]"
 
-If you want to use multiple classes, separate them by space.
-
-### Manually assign an id for a heading
-
-Indert `{:#your-id}` before this heading, for instance,
-
-~~~ {% raw %}
-{:#your-id}
-## Heading
-{% endraw %} ~~~
-
-If you want to then use it
-
-~~~ {% raw %}
-[Caption]({{ post.url }}#your-id)
-{% endraw %} ~~~
-
-### Insert toc (Table of Contents)
-
-There are actually two choices for the Table of contents! You can add one manually (as
-you see to the right, here):
-
-```
-{% raw %}{% include toc.html %}{% endraw %}
-```
-
-And you can also see the one generated in the left sidebar via the front end matter:
-
-```yaml
-toc: 1
-```
-
-### Make a list into columns
-
-Put the list inside a `<div>` tag like,
-
-{% highlight html %}
-<div class="thi-columns" markdown="1">
-- item 1
-- item 2
-- item 3
-- item 4
-- item 5
-- item 6
-</div>
+b = np.array([[1,2,3],[4,5,6]])    # Create a rank 2 array
+print(b.shape)                     # Prints "(2, 3)"
+print(b[0, 0], b[0, 1], b[1, 0])   # Prints "1 2 4"
 {% endhighlight %}
-
-And the result looks like this - notice how we span two colums!
-
-<div class="thi-columns" markdown="1">
-- item 1
-- item 2
-- item 3
-- item 4
-- item 5
-- item 6
-</div>
-
-### Insert a read-more link
-
-~~~ {% raw %}
-{% include more.html content="[Welcome to Math2IT](http://math2it.com)." %}
-{% endraw %} ~~~
-
-{% include more.html content="[Welcome to Math2IT](http://math2it.com)." %}
-
-
-### Insert steps
-
-If you want something like this:
-
-<div  class="thi-step">
-<div class="step">
-<div class="step-number">
-</div>
-<div class="step-content" markdown="1">
-Content in step 1.
-</div>
-</div>
-
-<div class="step">
-<div class="step-number">
-</div>
-<div class="step-content" markdown="1">
-Content in step 2
-</div>
-</div>
-</div>
-
-
-Do the following:
-
-~~~ html
-<div  class="thi-step">
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 1.
-</div>
-</div>
-
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 2
-</div>
-</div>
-</div>
-~~~
-
-
-## Mathematical expressions
-
-### Inline math
-For inline math, use `$math-expression$`
-
-### Block
-For an entire block, you can use `$math block$` or 
-
-
-	$x^n + y^n = z^n$
-
-
-Which will render to $x^n + y^n = z^n$.
-
-#### Special Characters
-
-If you want to insert some special characters, you must put `\` before this character, for instance, `\\{ 1,2,3 \\}` gives $\\{ 1m2,3 \\}$
-
-**Tips**
- - If you type inline math that contains characters `_`, you must add `\` before each of them, for example, `a\_1` give $a\_1$.
- - Don't use `||` for absolute values, let's use `\vert \vert` instead.
- - Don't use `\left\| \right\|` for norms, use `\Vert \Vert` instead.
- - Don't use `*` for star symbols, use `\ast` instead.
- - If you want to type `\\`, type `\\\\` instead.
-
-#### Matrices
-If you want to type an inline matrix, e.g., $[A]=\begin{bmatrix}1 & 2 \\\\ 2 & 3.999 \end{bmatrix}$, type like below,
-
-	$[A]=\begin{bmatrix}1 & 2 \\\\ 2 & 3.999 \end{bmatrix},$
-
-
-#### Labels
-In order to use `\label{}` and `\eqref{}` like in latex, use
-
-	$\begin{align}\tag{1}\label{eq1}
-	x^n + y^n = z^n
-	\end{align}
-	$
-	
-	Call again equation $\eqref{eq1}$.
-
-The above renders to:
-
-$\begin{align}\tag{1}\label{eq1}x^n + y^n = z^n\end{align}$
-Call again equation $\eqref{eq1}$.
-
-
-## Boxes
-
-### Theorem boxes
-
-A theorum box is a nice little callout to highlight some special text. You
-can create one as follows:
-
-{% highlight html %}
-<div class="thi-box" markdown="1">
-<div class="box-title" markdown="1">
-**Title**
-</div>
-<div class="box-content" markdown="1">
-Content
-</div>
-</div>
-{% endhighlight %}
-
-which renders into:
-
-<div class="thi-box" markdown="1">
-<div class="box-title" markdown="1">
-**Title**
-</div>
-<div class="box-content" markdown="1">
-Content
-</div>
-</div>
-
-
-### Interative coding blocks
-
-You even can embed **R/Python** code environment inside a post like this.
 
 <div class="mt-2 mb-2" data-datacamp-exercise data-lang="python">
-	<code data-type="pre-exercise-code">
+	<!-- <code data-type="pre-exercise-code">
 		# This will get executed each time the exercise gets initialized
 		b = 6
-	</code>
+	</code> -->
 	<code data-type="sample-code">
-		# Create a variable a, equal to 5
-		# Print out a
+		import numpy as np
+		a = np.array([2, 3, 4], dtype=np.uint32)
+		b = np.array([5, 6, 7], dtype=np.uint32)
+		c_unsigned32 = a - b
+		print('unsigned c:', c_unsigned32, c_unsigned32.dtype)
+
+		c_signed32 = a - b.astype(np.int32)
+		print('signed c:', c_signed32, c_signed32.dtype)
 	</code>
-	<code data-type="solution">
-		# Create a variable a, equal to 5
-		a <- 5
-
-		# Print out a
-		print(a)
-	</code>
-	<code data-type="sct">
-		test_object("a")
-		test_function("print")
-		success_msg("Great job!")
-	</code>
-	<div data-type="hint">Use the assignment operator (<code><-</code>) to create the variable <code>a</code>.</div>
+	<!-- <div data-type="hint">Use the assignment operator (<code><-</code>) to create the variable <code>a</code>.</div> -->
 </div>
 
+### Other useful
+- `np.eye(n)`: Identitiy matrix. `n` is a tuple (dimension of matrix) or `integer` `n x n` matrix.
+- `np.diag()`: If argument is a matrix, returns the diagonal elements. Else, creates a diagonal matrix
+{% highlight python linenos %}
+np.diag([1, 2, 3], 1)
 
-### Notification boxes
-
-A notification box is useful to draw the eyes of the reader to important content.
-You could create a warning, for example, like this:
-
-~~~ {% raw %}
-{% include warning.html content="Warning's content" %}
-{% endraw %} ~~~
-
-Rendered it looks like the following:
-
-{% include warning.html content="Warning's content" %}
-
-There is another style for information:
-
-~~~ {% raw %}
-{% include tip.html content="Info's content" %}
-{% endraw %} ~~~
-
-which renders to:
-
-{% include tip.html content="Info's content" %}
-
-
-### Insert Accordian
-
-An accordian menu hides some content, and the user can click to reveal it. It's
-best to use an icon on it that suggests that the user should click, like an arrow.
-
-Use these lines of code
-
-~~~ html
-<ul class="collapsible" data-collapsible="accordion">
-<li>
-<div class="collapsible-header" markdown="1"><i class="material-icons">expand_more</i>
-Title
+a = np.array([[1, 2], [3, 4]])
+{% endhighlight %}
+- `np.vander(x, n)`: `x` is an input 1D array/list/type. `n-1` is the highest polynomial
+<div class='mt-2 mb-2' data-datacamp-exercise data-lang='python'>
+<code data-type='sample-code'>
+import numpy as np
+np.vander((1, 2, 3, 4), 4)
+</code>
 </div>
-<div class="collapsible-body" markdown="1">
-Content
-</div>
-</li>
-</ul>
-~~~
 
-The above renders into an expandable section:
+- `np.zeros()`, `np.ones()`
+- Must use `.copy()` or will point at same array
+- `np.random.random()` creates array with random values
 
-<ul class="collapsible" data-collapsible="accordion">
-<li>
-<div class="collapsible-header" markdown="1"><i class="material-icons">expand_more</i>
-Title
-</div>
-<div class="collapsible-body" markdown="1">
-Content
-</div>
-</li>
-</ul>
+### Indexing
 
-### Insert blockquote
-
-A blockquote is a nice style to show a quote, for example:
-
-<p class="post-more-info" markdown="1">
-The content of extra info of the post.
-</p>
-
-And you can generate the above as follows:
-
-{% highlight html %}
-<p class="post-more-info" markdown="1">
-The content of extra info of the post.
-</p>
+- `b = a[:2, 1:3]`
+{% highlight python linenos %}
+row_r1 = a[1, :]    # Rank 1 view of the second row of a
+row_r2 = a[1:2, :]  # Rank 2 view of the second row of a
 {% endhighlight %}
 
-> Other normal blockquote like this.
+<div class='mt-2 mb-2' data-datacamp-exercise data-lang='python'>
+<code data-type='sample-code'>
+import numpy as np
 
-### Summary block
+a = np.array([[1,2], [3, 4], [5, 6]])
 
-A summary block has a title, and then some content, and is another strategy
-to point out more salient information. If you use these lines of code:
+# An example of integer array indexing.
+# The returned array will have shape (3,) and
+print(a[[0, 1, 2], [0, 1, 0]])  # Prints "[1 4 5]"
 
-{% highlight html %}{%raw%}
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">Title</legend>
-Content
-</fieldset>
-{%endraw%}{% endhighlight %}
+# The above example of integer array indexing is equivalent to this:
+print(np.array([a[0, 0], a[1, 1], a[2, 0]]))  # Prints "[1 4 5]"
 
-You can then generate:
-
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">Title</legend>
-Content
-</fieldset>
-
-{:#cat-tag}
-## Categories and tags
-
-### Use it
-
-On the front matter of each post, use this
-
-~~~
-categories: [maths, python] 
-tags: [algebra, function, theorem]
-~~~
-
-### Create a new category
-
-1. Below the title of each post, you will see "in <category>", for example, this post **in NoteTheme**.
-2. Open file `_data\categories.yml` and add the new category you want
-	- `slug`: the id of this category, it will appear in the url, like
-		~~~
-		https://dinhanhthi.github.io/notetheme/categories#notetheme
-		~~~
-	- `name` : the name of this catefory, it will appear on the site, like `notetheme`
-
-### Already-defined tags / categories
-
-Already-defined categories:
-
-<div class="thi-columns">
-<ul>
-{% for cat in site.data.categories %}
-<li><code class="highlighter-rouge">{{ cat.slug }}</code> : <a href="/{{cat.slug}}">{{ cat.name }}</a></li>
-{% endfor %}
-</ul>
+# When using integer array indexing, you can reuse the same
+# element from the source array:
+print(a[[0, 0], [1, 1]])  # Prints "[2 2]"
+</code>
 </div>
-
-<p>
-Already-defined tags: 
-{% for tag in site.tags %}
-<code class="highlighter-rouge">{{ tag[0] }}</code>
-{% if forloop.last == false %}
-, 
-{% else %}
-.
-{% endif %}
-{% endfor %}
-</p>
-
-
-## Text
-
-- **New** badge: `<new />`
-- **Update** bagge: `<update />`
-- **Keyboard**: `<kbd>Ctrl</kbd>`
-
-<new />
-<update />
-<kbd>Ctrl</kbd>
-
-
-## Figures / Tables / Videos
-
-- **Normal way**
-
-  ~~~ {% raw %}
-  ![](/link/to/figure/){:.w-500 .no-border}
-  {% endraw %} ~~~
-
-- **Inline figures**
-
-  ~~~ {% raw %}
-  {% include img-inline.html content="/link/to/figure/" %}
-  {% endraw %} ~~~
-
-- **Youtube video**
-
-  ~~~ {% raw %}
-  {% include youtube.html content="wIsK4kQTrIg" size="5" %}
-  {% endraw %} ~~~
-
-
-## Boxes
-
-### Hide/Show
-
-~~~ html
-<ul class="collapsible" data-collapsible="accordion">
-<li>
-<div class="collapsible-header" markdown="1"><i class="material-icons">face</i>
-Title
-</div>
-<div class="collapsible-body" markdown="1">
-Content
-</div>
-</li>
-</ul>
-~~~
-
-### Notifications
-
-- Info
-
-  ~~~ html
-  <p markdown="1" class="thi-tip">
-  <i class="material-icons mat-icon">info</i>
-  content
-  </p>
-  ~~~
-
-- Error
-
-  ~~~ html
-  <p markdown="1" class="thi-warning">
-  <i class="material-icons mat-icon">error</i>
-  content
-  </p>
-  ~~~
-
-
-### Pull quotes
-
-~~~ html
-<p class="post-more-info" markdown="1">
-The content of extra info of the post.
-</p>
-~~~
-
-### Summarization box
-
-~~~ html
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">Title</legend>
-Content
-</fieldset>
-~~~
-
-### Theorem style
-
-~~~ html
-<div class="thi-box" markdown="1">
-<div class="box-title" markdown="1">
-**Title**
-</div>
-<div class="box-content" markdown="1">
-Content
-</div>
-</div>
-~~~
-
-### Important boxes
-
-~~~ html
-<div class="p-mark" markdown="1">
-Content
-</div>
-~~~
-
-## Others
-
-### Side by side
-
-~~~ html
-<div class="row d-flex" markdown="1">
-<div class="col s12 l6" markdown="1">
-This is the code
-</div>
-<div class="col s12 l6" markdown="1">
-This is the result
-</div>
-</div>
-~~~
-
-### Links
-
-See again
-
-~~~ html
-<div class="see-again">
-<i class="material-icons">settings_backup_restore</i>
-<span markdown="1">
-Content
-</span>
-</div>
-~~~
-
-Read-more link
-
-~~~ {% raw %}
-{% include more.html content="[Welcome to Math2IT](http://math2it.com)." %}
-{% endraw %} ~~~
-
-Download
-
-~~~ {% raw %}
-{% include download.html content="[Download text](download link)." %}
-{% endraw %} ~~~
-
-### Notices
-
-You can create a notice as follows:
-
-```html
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">TL;DR</legend>
-- Show the post in a flexible way.
-- Show the figures any place
-- Show the maths, the code blocks in a beautiful way.
-- and many things else...
-</fieldset>
-```
-
-And it looks like this
-
-<fieldset class="field-set" markdown="1">
-<legend class="leg-title">TL;DR</legend>
-- Show the post in a flexible way.
-- Show the figures any place
-- Show the maths, the code blocks in a beautiful way.
-- and many things else...
-</fieldset>
-
-### Steps
-
-~~~ html
-<div  class="thi-step">
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 1.
-</div>
-</div>
-
-<div class="step">
-<div class="step-number"></div>
-<div class="step-content" markdown="1">
-Content in step 2
-</div>
-</div>
-</div>
-~~~
