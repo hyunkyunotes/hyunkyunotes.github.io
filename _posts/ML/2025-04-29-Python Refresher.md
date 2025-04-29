@@ -213,9 +213,18 @@ np.vander((1, 2, 3, 4), 4)
 - `np.zeros()`, `np.ones()`
 - Must use `.copy()` or will point at same array
 - `np.random.random()` creates array with random values
+- `np.arange([start, ]stop, [step, ]dtype=None,)`, all parameters optional except start
+
+{% highlight python linenos %}
+np.arange(2, 3, 0.1, dtype=float)
+array([2. , 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9])
+{% endhighlight %}
+
+- `np.linspace(start, stop, step)` similar to arrange but inclusive of `stop`
 
 ### Indexing
 
+- [Docs](https://numpy.org/doc/stable/user/basics.indexing.html)
 - `b = a[:2, 1:3]`
 {% highlight python linenos %}
 row_r1 = a[1, :]    # Rank 1 view of the second row of a
@@ -240,3 +249,90 @@ print(np.array([a[0, 0], a[1, 1], a[2, 0]]))  # Prints "[1 4 5]"
 print(a[[0, 0], [1, 1]])  # Prints "[2 2]"
 </code>
 </div>
+
+### Boolean indexing
+
+- Convert array to boolean array
+<div class='mt-2 mb-2' data-datacamp-exercise data-lang='python'>
+<code data-type='sample-code'>
+import numpy as np
+
+a = np.array([[1,2], [3, 4], [5, 6]])
+
+bool_idx = (a > 2)   # Find the elements of a that are bigger than 2;
+                     # this returns a numpy array of Booleans of the same
+                     # shape as a, where each slot of bool_idx tells
+                     # whether that element of a is > 2.
+
+print(bool_idx)      # Prints "[[False False]
+                     #          [ True  True]
+                     #          [ True  True]]"
+
+# We use boolean array indexing to construct a rank 1 array
+# consisting of the elements of a corresponding to the True values
+# of bool_idx
+print(a[bool_idx])  # Prints "[3 4 5 6]"
+
+# We can do all of the above in a single concise statement:
+print(a[a > 2])     # Prints "[3 4 5 6]"
+</code>
+</div>
+
+### Datatype
+
+- Check [Docs](https://numpy.org/doc/stable/reference/arrays.dtypes.html)
+
+### Arithmetic
+
+- Done elementwise 
+- `x.dot(y)`: inner product
+- `np.sum(x, axis=n)`: if `axis` parameter not specified, sums whole product. If specified, `axis=0` corresponds to sum of each column, `axis=1` is sum of each row. Returns array
+- `x.T`: Transpose
+
+### Broadcasting
+
+- Using smaller array multiple times
+- `y.empty_like(x)`: returns zero array of same shape as `x`
+- `tile(v, (x, y))` stacks `y` copies of `v` per row for `x` rows
+- Broadcasting automatically stretches a vector to make arithmetic compatible
+
+#### Rules
+
+Compatible when
+- they are equal, or
+- one of them is 1.
+- e.g. (8,1,6,1) and (,7,1,5) are compatible since 2nd & 4th dimension of first vector is 1, 3rd vector of 2nd vector is 1
+
+#### Example
+
+<div class='mt-2 mb-2' data-datacamp-exercise data-lang='python'>
+<code data-type='sample-code'>
+import numpy as np
+
+v = np.array([1,2,3])  # v has shape (3,)
+w = np.array([4,5])    # w has shape (2,)
+
+print(np.reshape(v, (3, 1)) * w)
+
+x = np.array([[1,2,3], [4,5,6]])
+
+print(x + v)
+
+print((x.T + w).T)
+
+print(x + np.reshape(w, (2, 1)))
+print(x * 2)
+</code>
+</div>
+
+- [Docs](https://numpy.org/doc/stable/user/basics.broadcasting.html)
+
+## SciPy
+
+### [Docs](https://docs.scipy.org/doc/scipy/reference/index.html)
+
+## MatPlotLib
+
+### [Docs](https://matplotlib.org/stable/users/index.html)
+
+- `matplotlib.pyplot as plt`, `subplot(height, width, index)`, `plot(x,y)`, `xlabel()`, `title()`, `legend()`, `show()`
