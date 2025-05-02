@@ -10,6 +10,32 @@ date: 2025-04-29
 
 {% include toc.html %}
 
+## Keywords
+
+- `try` & `except`
+- No coercion, i.e. (`x = 5, y = "3", x + y` causes `TypeError`)
+- `$python -c "..."`: one-liner code snippet
+- `$python -i ___.py`: runs the file and remains in interactive mode
+
+## Environment Management
+
+- Virtual Envs for maintainability and replication
+- Method 1: `venv`
+- Method 2: `conda`: more popular
+
+{% highlight python linenos %}
+$ conda create –n <environment_name>
+$ conda create -n <environment_name> python=3.7
+$ conda env create -f <environment.yml>
+$ conda activate <environment_name>
+<...do stuff...>
+$ conda deactivate
+$ conda activate <environment_name>
+$ conda env export > environment.yml
+{% endhighlight %}
+
+![](./assets/img/conda-install.png){:.w-500 .no-border}
+
 ## List Comprehension
 
 - Input sequence
@@ -336,3 +362,17 @@ print(x * 2)
 ### [Docs](https://matplotlib.org/stable/users/index.html)
 
 - `matplotlib.pyplot as plt`, `subplot(height, width, index)`, `plot(x,y)`, `xlabel()`, `title()`, `legend()`, `show()`
+- Tip: Look at [library](https://matplotlib.org/stable/gallery/index.html)
+
+## Scikit-learn
+
+### [TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)
+
+{% highlight python linenos %}
+from sklearn.decomposition import TruncatedSVD
+svd = TruncatedSVD(n_components=k)
+svd.fit(M)
+M_reduced = svd.transform(M) //applies SVD from shape of M (n, m) to (n,k)
+{% endhighlight %}
+
+- In terms of SVD, returns `U * S`
