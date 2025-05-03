@@ -376,3 +376,52 @@ M_reduced = svd.transform(M) //applies SVD from shape of M (n, m) to (n,k)
 {% endhighlight %}
 
 - In terms of SVD, returns `U * S`
+
+## [PyTorch](https://pytorch.org/docs/stable/index.html)
+
+- Importing: `import torch`, `import torch.nn as nn`
+
+### Tensors
+
+- Building block
+- multi-dimensional matrix
+`data = torch.tensor(some_list, dtype=torch.float32)`
+- dtype = optional parameter for data type
+- `torch.zeros(2,5) #tensor of all zeros`, similar to numpy, has `arange, torch.ones(), shape`, and similar arithmetic
+- use either `a.matmul(b)` or `a @ b` for matrix multiplication
+- to reshape: `data.view((shape))` or `reshape()`
+- can convert from numpy array to tensor and vice versa
+	- `data.numpy()`, `torch.tensor(arr)`
+- similar `sum` method to numpy, but `dim=k` instead of `axis=k`, if `dim` is omitted, returns sum of whole tensor
+- other methods also have `dim` parameter (e.g. `std`)
+{% highlight python linenos %}
+data = torch.arange(1, 7, dtype=torch.float32).reshape(1, 2, 3)
+print(data)
+print(data.sum(dim=0).sum(dim=0))
+print(data.sum(dim=0).sum(dim=0).shape)
+{% endhighlight %}
+
+#### Indexing
+
+- Similar to numpy
+
+{% highlight python linenos %}
+# Initialize an example tensor
+x = torch.Tensor([
+                  [[1, 2], [3, 4]],
+                  [[5, 6], [7, 8]],
+                  [[9, 10], [11, 12]]
+                 ])
+# Shape (3,2,2)
+# Let's access the 0th and 1st elements, each twice
+# same as stacking x[0], x[0], x[1], x[1]
+i = torch.tensor([0, 0, 1, 1])
+
+# Let's access the 0th elements of the 1st and 2nd elements
+i = torch.tensor([1, 2])
+j = torch.tensor([0])
+{% endhighlight %}
+
+#### Autograd
+
+- `backward` method to calculate gradient
