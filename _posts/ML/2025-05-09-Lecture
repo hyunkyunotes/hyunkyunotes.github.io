@@ -1,0 +1,51 @@
+---
+title: Python Refresher
+categories: [ML]
+tags: [CS224N]
+datacamp: 1
+maths: 1
+toc: 1
+date: 2025-04-29
+---
+
+{% include toc.html %}
+
+## RNN
+
+### Regularization
+
+- e.g. L2 regularization (using L2 norm, i.e. square sum)
+- Classical view: prevents overfitting, especially when there are lots of features
+    - reduces cases where model is specialized to training (i.e. training error and test error gap is big and thus overfitted to the training data)
+- Now: produces models that generalize well for a "big" model
+    - Because with a huge data, gap will reduce as data size increases 
+    - thus, do not care too much for overfitting
+
+### Droupout
+
+- At trainign tiem, for each data, randomly set each input to 0 with prob p
+- At test time, retain weights but scale them (don't set to 0)
+- search what benefits it have
+    - Prevents feature co-adaptation -> good regularization
+- "feature dependent regularization"
+
+### Vectorization
+
+- For loop is much less efficient, instead concatenate into a large matrix and use vector operations
+
+### Parameter Initialization
+
+- initialize weights to small rnadom values (instead of zero matrices to avoid symmetries that prevent learning)
+
+### Optimizers
+
+- Start them with initial learning rate
+- learn more
+- Adam is a good optimizer
+    - search more and how/when to use
+
+## Languagw Modeling
+
+- trying to predict what word comes next from context
+    - i.e. $P\(x^(t+1)|x(t), \ldots,x(1)\}$
+- Remark: Probability of text $P(x^{(1)},\ldots, x^{(t)}\}=P(x_1)\cdot P(x_2\vert x_1)\cdot\ldots P(x_t \vert \ldots)=\Pi_\ldots$
